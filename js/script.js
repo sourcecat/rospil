@@ -33,9 +33,9 @@ var Zakupka = {
 	url: '',
     options: {
         urls: {
-            xml: '/rospil/getxml.php', // передавать id
-            html:'/rospil/gethtml.php',// передавать url
-            date:'/rospil/getdate.php' // получение текущего времени в формате m/dd/yyyy hh:mm (UTC+hhhh)
+            xml: '/getxml.php', // передавать id
+            html:'/gethtml.php',// передавать url
+            date:'/getdate.php' // получение текущего времени в формате m/dd/yyyy hh:mm (UTC+hhhh)
         }
     },
     // Номер заказа
@@ -239,6 +239,7 @@ var Zakupka = {
 		Zakupka.url=url;
 		console.log(url);
         Zakupka.id = url.substring( url.indexOf('=') + 1 );
+        console.log(Zakupka.id);
         // Обращение ко вкладке «Общая информация» вида
         // http://zakupki.gov.ru/pgz/public/action/orders/info/common_info/show?notificationId=4054460
         $.ajax({
@@ -264,7 +265,12 @@ var Zakupka = {
         				today = new Date(dataTime.date); 
         				
         				// Размещение заказа осуществляет
-        				Zakupka.zakaz.orderPlacedBy.val=findValueByTitle(data, 'Размещение заказа осуществляет')[0];
+                        var orderPlacedBy = findValueByTitle(data, 'Размещение заказа осуществляет');
+                        if (!orderPlacedBy) {
+                            console.log("Zakupka.options.urls.html ==> " + Zakupka.options.urls.html);
+                            return;
+                        }
+        				Zakupka.zakaz.orderPlacedBy.val=orderPlacedBy[0];
 							// Уполномоченный орган
 							if(Zakupka.zakaz.orderPlacedBy.val.indexOf('Уполномоченный орган')!=-1){
 								Zakupka.zakaz.orderPlacedBy.isAccredited=true;
@@ -599,6 +605,7 @@ function timeToStr(date){ // преобразует объект Date в мас�
 
 function findValueByTitle(data,labelName){ // находит значение поля информации о заказе по его названию
 				var value=[];
+                console.log("DATA: " + data);
 				var label=$(data).find('.orderInfo').find('.orderInfoCol1').filter( function(){			
 					if($(this).find('.iceOutLbl').html()){
 						return $(this).find('.iceOutLbl').html().trim()==labelName//'Окончание подачи котировочных заявок';

@@ -1,12 +1,12 @@
 <?php
-    $commonUrl = 'http://zakupki.gov.ru/pgz/public/action/orders/info/common_info/show?notificationId=';
-    $notifyUrl = 'http://zakupki.gov.ru/pgz/printForm?type=NOTIFICATION&id=';
-    $id = $_GET['id'];
+    // $commonUrl = 'http://zakupki.gov.ru/pgz/public/action/orders/info/common_info/show?notificationId=';
+    // $notifyUrl = 'http://zakupki.gov.ru/pgz/printForm?type=NOTIFICATION&id=';
+    // $id = $_GET['id'];
     
      
-    $url = $baseUrl.$id;
-    $homepage = file_get_contents($url);
-    $result = '_jqjsp( { "errmark" : ';
+    // $url = $baseUrl.$id;
+    // $homepage = file_get_contents($url);
+    // $result = '_jqjsp( { "errmark" : ';
     /*$pos = -1;
     do {
         $pos = strpos($homepage, 'rs_err_mark', $pos+1);
