@@ -1,28 +1,3 @@
-<?php
-    // $commonUrl = 'http://zakupki.gov.ru/pgz/public/action/orders/info/common_info/show?notificationId=';
-    // $notifyUrl = 'http://zakupki.gov.ru/pgz/printForm?type=NOTIFICATION&id=';
-    // $id = $_GET['id'];
-    
-     
-    // $url = $baseUrl.$id;
-    // $homepage = file_get_contents($url);
-    // $result = '_jqjsp( { "errmark" : ';
-    /*$pos = -1;
-    do {
-        $pos = strpos($homepage, 'rs_err_mark', $pos+1);
-        echo '<p>'.$pos.'</p>';
-    } while ($pos != false);*/
-    
-//echo preg_match("/'rs_err_mark'>.*?([а-я][a-z]|[a-z][а-я]).*?</is", $homepage);
-    
-    //echo htmlspecialchars($homepage);
-    /*if ( strpos($homepage, 'rs_err_mark') != false) {
-        $result.='true';
-    } else {
-        $result.='false';
-    }
-    echo $result.' } )';*/
-?>
 <!DOCTYPE HTML>
 <html lang="ru-RU" id="test">
 <head>
