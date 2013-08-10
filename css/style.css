@@ -175,3 +175,10 @@ address {
   width: 406px;
   margin-bottom: 6px;
 }
+
+.inputText {
+    border-bottom: 1px dotted #666;
+}
+.inputText.jinplaceEmpty {
+    color: #c55;
+}

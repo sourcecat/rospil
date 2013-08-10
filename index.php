@@ -48,13 +48,13 @@
         </div>
         <div id="informer" class="alignRight">
             <h3>Заявитель:</h3>
-            <h4><span id="informerName" class="inputText">ФИО полностью</span></h4>
-            <p><em>Почтовый адрес:</em> <span id="informerAddress" class="inputText">Для корреспонденции</span>;</p>
-            <p><em>Место жительства:</em> <span id="informerPlace" class="inputText">Адрес проживания</span>;</p>
-            <p><em>Телефон:</em> <span id="informerPhone" class="inputText">Номер телефона</span>;</p>
-            <p><em>факс:</em><span id="informerFax" class="inputText">Номер факса</span>;</p>
-            <p><em>Электронная почта:</em> <span id="informerEmail" class="inputText">Адрес email</span>;</p>
-            <p><em>Мобильный телефон:</em> <span id="informerMobile" class="inputText">Номер мобильного</span>.</p>
+            <h4><span id="informerName" class="inputText" data-nil="[Введите ФИО полностью]"></span></h4>
+            <p><em>Почтовый адрес:</em> <span id="informerAddress" class="inputText" data-nil="[Для корреспонденции]"></span>;</p>
+            <p><em>Место жительства:</em> <span id="informerPlace" class="inputText" data-nil="[Адрес проживания]"></span>;</p>
+            <p><em>Телефон:</em> <span id="informerPhone" class="inputText" data-nil="[Введите номер телефона]"></span>;</p>
+            <p><em>факс:</em><span id="informerFax" class="inputText" data-nil="[Номер факса]"></span>;</p>
+            <p><em>Электронная почта:</em> <span id="informerEmail" class="inputText" data-nil="[Адрес e-mail]"></span>;</p>
+            <p><em>Мобильный телефон:</em> <span id="informerMobile" class="inputText" data-nil="[Номер мобильного]"></span>.</p>
         </div>
         
 
@@ -132,9 +132,8 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.js"></script>
     <script>!window.jQuery && document.write(unescape('%3Cscript src="js/jquery-1.8.0.min.js"%3E%3C/script%3E'))</script>
-    <script type="text/javascript">
-        /*var id = <?php echo $id; ?>;*/
-    </script>
+
+    <script type="text/javascript" src="js/jquery.jinplace.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </body>

@@ -231,15 +231,19 @@ var Zakupka = {
             // Чтение из куки сохраненных данных
             Zakupka.informer[i].val = getCookie(Zakupka.informer[i].id) || '';
             // Вывод полученных данных в форму
-            $('#'+Zakupka.informer[i].id).children('input').val( Zakupka.informer[i].val );
+            if ($('#'+Zakupka.informer[i].id).hasClass('inputText')) {
+                var jp = $('#'+Zakupka.informer[i].id).data('plugin_jinplace');
+                jp.onUpdate(Zakupka.informer[i].val);
+            } else {
+                $('#'+Zakupka.informer[i].id).text( Zakupka.informer[i].val );
+            }
         }
     },
     // Получение данных с сервера
     getData: function(url){
 		Zakupka.url=url;
-		console.log(url);
         Zakupka.id = url.substring( url.indexOf('=') + 1 );
-        console.log(Zakupka.id);
+
         // Обращение ко вкладке «Общая информация» вида
         // http://zakupki.gov.ru/pgz/public/action/orders/info/common_info/show?notificationId=4054460
         $.ajax({
@@ -629,17 +633,23 @@ function showErrorMessage(msg) {	// Вывод сообщения об ошиб�
 				$('#loader').addClass('error').text('Ошибка! ' + msg);
 }
 $(function(){
+    const DEFAULT_PLACEHOLDER = '[Нажмите для ввода]';
+
     $('#url').focus().on('keypress', function(e){
         if (e.keyCode == KEY_ENTER) goNext();
     });
     $('#btnGo').on('click', goNext);
     $('#btnPrint').on('click', function(e){
-        // Сохранение введенных данных
-        for (var i in Zakupka.informer) {
-            Zakupka.informer[i].val = $('#'+Zakupka.informer[i].id).children('input').val();
-            $('#'+Zakupka.informer[i].id).empty().text(Zakupka.informer[i].val);
-            if(navigator.cookieEnabled) setCookie(Zakupka.informer[i].id, Zakupka.informer[i].val, getExpDate(365));
-        }
+    
+        $('.inputText').each(function(){
+            var $this = $(this);
+            var jp = $this.data('plugin_jinplace');
+            jp.fetchData(jp.opts).done( function(data) {
+                $this.hide();
+                $('<span class="temporary">' + data + '</span>').insertAfter($this);
+            });
+        });
+
 		$('#violations').find('input, textarea').each(function(){
 			var el=$(this)
 			var text=$(this).attr('value');
@@ -665,14 +675,9 @@ $(function(){
     });
 	
 	$('#btnBack').on('click', function(e){
-        $('.inputText').each(function(i,el){
-			var text = $(this).text();
-			$(this).html('<input type="text" placeholder="" value="'+text+'">')
-		});
-		$('.textArea').each(function(i,el){
-			var text = $(this).text();
-			$(this).after('<textarea name="" id="" cols="80" rows="1" value="">'+text+'</textarea>').remove();
-		});
+        $('.inputText').show();
+        $('.temporary').remove();
+        
 		$('#btnBack').hide();
         $('#btnPrintPDF').hide();
         $('#btnPrint').show();
@@ -683,13 +688,23 @@ $(function(){
         window.print();
     });
 
-    // Поля для ввода данных пользователем
-    $('.inputText').each(function(i,el){
-        var input = $('<input/>', {
-            type: 'text',
-            placeholder: $(el).text()
-        });
-        $(el).empty().append(input);
+    $('.inputText').jinplace({
+        url: false,
+        textOnly: true,
+        nil: DEFAULT_PLACEHOLDER,
+        onSubmit: function() {
+            for (var i in Zakupka.informer) {
+            
+                var $obj = $('#'+Zakupka.informer[i].id);
+                var val = $obj.text();
+                if (val === $obj.attr('data-nil') || val === DEFAULT_PLACEHOLDER)
+                    val = ''
+                Zakupka.informer[i].val = val
+
+                if (navigator.cookieEnabled)
+                    setCookie(Zakupka.informer[i].id, Zakupka.informer[i].val, getExpDate(365));
+            }
+        }
     });
 	
 	$('.addViolation').on('click', function(e){
@@ -702,10 +717,6 @@ $(function(){
 		$(this).closest('li').slideUp();
 	});
 	
-	$('#informerName').children('input').on('keydown, blur', function(){
-		$('#informerFIO').text($(this).val());
-	});
-    
     Zakupka.init();
 });
 
