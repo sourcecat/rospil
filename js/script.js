@@ -29,6 +29,29 @@ function setCookie(name, value, expires, path, domain, secure) {
         (secure ? ";secure" : "");
 }
 
+const DEFAULT_PLACEHOLDER = '[Нажмите для ввода]';
+
+function initJinplace(selector) {
+    $(selector).jinplace({
+        url: false,
+        textOnly: true,
+        nil: DEFAULT_PLACEHOLDER,
+        onSubmit: function() {
+            for (var i in Zakupka.informer) {
+            
+                var $obj = $('#'+Zakupka.informer[i].id);
+                var val = $obj.text();
+                if (val === $obj.attr('data-nil') || val === DEFAULT_PLACEHOLDER)
+                    val = ''
+                Zakupka.informer[i].val = val
+
+                if (navigator.cookieEnabled)
+                    setCookie(Zakupka.informer[i].id, Zakupka.informer[i].val, getExpDate(365));
+            }
+        }
+    });
+}
+
 var Zakupka = {
 	url: '',
     options: {
@@ -633,8 +656,6 @@ function showErrorMessage(msg) {	// Вывод сообщения об ошиб�
 				$('#loader').addClass('error').text('Ошибка! ' + msg);
 }
 $(function(){
-    const DEFAULT_PLACEHOLDER = '[Нажмите для ввода]';
-
     $('#url').focus().on('keypress', function(e){
         if (e.keyCode == KEY_ENTER) goNext();
     });
@@ -687,25 +708,8 @@ $(function(){
     $('#btnPrintPDF').on('click', function(e){
         window.print();
     });
-
-    $('.inputText').jinplace({
-        url: false,
-        textOnly: true,
-        nil: DEFAULT_PLACEHOLDER,
-        onSubmit: function() {
-            for (var i in Zakupka.informer) {
-            
-                var $obj = $('#'+Zakupka.informer[i].id);
-                var val = $obj.text();
-                if (val === $obj.attr('data-nil') || val === DEFAULT_PLACEHOLDER)
-                    val = ''
-                Zakupka.informer[i].val = val
-
-                if (navigator.cookieEnabled)
-                    setCookie(Zakupka.informer[i].id, Zakupka.informer[i].val, getExpDate(365));
-            }
-        }
-    });
+    
+    initJinplace('.inputText');
 	
 	$('.addViolation').on('click', function(e){
 		e.preventDefault();

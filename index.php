@@ -7,6 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
+    
 </head>
 <body>
     <div id="getUrl" class="alignCenter">
@@ -79,28 +83,13 @@
 		</ul>
 		<p>
 		При размещении заказа Заказчик допустил нарушения Закона о размещении заказов, что может привести к ограничению количества участников размещения заказа:
-		<ol id="violations">
-			<li>
-				В нарушение ст. <span class="inputText"></span> Закона о размещении заказов, <textarea name="" id="" cols="80" rows="1"></textarea>
-			</li>
-			<li style="display:none">
-				В нарушение ст. <span class="inputText"></span> Закона о размещении заказов, <textarea name="" id="" cols="80" rows="1"></textarea><a href="#" class="removeViolation">X</a>
-			</li>
-			<li style="display:none">
-				В нарушение ст. <span class="inputText"></span> Закона о размещении заказов, <textarea name="" id="" cols="80" rows="1"></textarea><a href="#" class="removeViolation">X</a>
-			</li>
-			<li style="display:none">
-				В нарушение ст. <span class="inputText"></span> Закона о размещении заказов, <textarea name="" id="" cols="80" rows="1"></textarea><a href="#" class="removeViolation">X</a>
-			</li>
-			<li style="display:none">
-				В нарушение ст. <span class="inputText"></span> Закона о размещении заказов, <textarea name="" id="" cols="80" rows="1"></textarea><a href="#" class="removeViolation">X</a>
-			</li>
-			<li style="display:none">
-				В нарушение ст. <span class="inputText"></span> Закона о размещении заказов, <textarea name="" id="" cols="80" rows="1"></textarea><a href="#" class="removeViolation">X</a>
-			</li>
-			<li style="display:none">
-				В нарушение ст. <span class="inputText"></span> Закона о размещении заказов, <textarea name="" id="" cols="80" rows="1"></textarea><a href="#" class="removeViolation">X</a>
-			</li>
+		<ol id="violations" ng-app ng-controller="ViolationsController">
+            <li>
+                <select ng-model="selected" ng-change="setViolation()" ng-options="id as violation.short_name for (id, violation) in violations">
+                    <option value="">-- Выберите нарушение из списка --</option>
+                </select>
+                <div ng-bind-html-unsafe="renderText(text)"></div>
+            </li>
 			<li style="display:none">
 				В нарушение ст. <span class="inputText"></span> Закона о размещении заказов, <textarea name="" id="" cols="80" rows="1"></textarea><a href="#" class="removeViolation">X</a>
 			</li>
