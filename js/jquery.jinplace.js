@@ -275,7 +275,7 @@
 			} else {
 				data = $.trim(this.element.html());
 			}
-
+            
 			var placeholderFilter = function (data) {
 				if (data == opts.placeholder)
 					return '';
@@ -371,7 +371,11 @@
 	$.fn[pluginName] = function (options, extraData) {
 		return this.each(function () {
 			if (!$.data(this, "plugin_" + pluginName)) {
-				$.data(this, "plugin_" + pluginName, new JinPlace(this, options));
+                var jp = new JinPlace(this, options);
+				$.data(this, "plugin_" + pluginName, jp);
+                jp.fetchData(jp.opts).done( function(data) {
+                    jp.onUpdate(data);
+                });
 			}
 		});
 	};

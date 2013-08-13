@@ -180,5 +180,7 @@ address {
     border-bottom: 1px dotted #666;
 }
 .inputText.jinplaceEmpty {
-    color: #c55;
+    color: #e05;
+    font-weight: bold;
+    font-size: 0.8em;
 }
