@@ -88,7 +88,7 @@
                 <select ng-model="selected" ng-change="setViolation()" ng-options="id as violation.short_name for (id, violation) in violations">
                     <option value="">-- Выберите нарушение из списка --</option>
                 </select>
-                <div ng-bind-html-unsafe="renderText(text)"></div>
+                <div ng-include src="violation_html" onload="renderHtml()"></div>
             </li>
 			<li style="display:none">
 				В нарушение ст. <span class="inputText"></span> Закона о размещении заказов, <textarea name="" id="" cols="80" rows="1"></textarea><a href="#" class="removeViolation">X</a>
