@@ -184,3 +184,6 @@ address {
     font-weight: bold;
     font-size: 0.8em;
 }
+#violations > li {
+    margin: 10px 0;
+}

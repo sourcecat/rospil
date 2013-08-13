@@ -690,6 +690,7 @@ $(function(){
 		});  
 
 		$('.addViolation, .removeViolation').hide();
+        $('.add-violation-form').hide();
         $(this).hide();
         $('#btnBack').show();
         $('#btnPrintPDF').show();
@@ -703,6 +704,7 @@ $(function(){
         $('#btnPrintPDF').hide();
         $('#btnPrint').show();
         $('.addViolation, .removeViolation').show();
+        $('.add-violation-form').show();
     });
 	
     $('#btnPrintPDF').on('click', function(e){

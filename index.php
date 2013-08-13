@@ -83,16 +83,65 @@
 		</ul>
 		<p>
 		При размещении заказа Заказчик допустил нарушения Закона о размещении заказов, что может привести к ограничению количества участников размещения заказа:
-		<ol id="violations" ng-app ng-controller="ViolationsController">
-            <li>
+		<ol id="violations" ng-app>
+            <li ng-controller="ViolationsController">
+                <div class="add-violation-form">
+                    <select ng-model="selected" ng-change="setViolation()" ng-options="id as violation.short_name for (id, violation) in violations">
+                        <option value="">-- Выберите нарушение из списка --</option>
+                    </select>
+                </div>
+                <span ng-include src="violation_html" onload="renderHtml()"></span>
+            </li>
+            <li ng-controller="ViolationsController" style="display:none">
+                <div class="add-violation-form">
+                    <select ng-model="selected" ng-change="setViolation()" ng-options="id as violation.short_name for (id, violation) in violations">
+                        <option value="">-- Выберите нарушение из списка --</option>
+                    </select><a href="#" class="removeViolation">X</a>
+                </div>
+                <span ng-include src="violation_html" onload="renderHtml()"></span>
+            </li>
+            <li ng-controller="ViolationsController" style="display:none">
                 <select ng-model="selected" ng-change="setViolation()" ng-options="id as violation.short_name for (id, violation) in violations">
                     <option value="">-- Выберите нарушение из списка --</option>
-                </select>
+                </select><a href="#" class="removeViolation">X</a>
                 <div ng-include src="violation_html" onload="renderHtml()"></div>
             </li>
-			<li style="display:none">
-				В нарушение ст. <span class="inputText"></span> Закона о размещении заказов, <textarea name="" id="" cols="80" rows="1"></textarea><a href="#" class="removeViolation">X</a>
-			</li>
+            <li ng-controller="ViolationsController" style="display:none">
+                <select ng-model="selected" ng-change="setViolation()" ng-options="id as violation.short_name for (id, violation) in violations">
+                    <option value="">-- Выберите нарушение из списка --</option>
+                </select><a href="#" class="removeViolation">X</a>
+                <div ng-include src="violation_html" onload="renderHtml()"></div>
+            </li>
+            <li ng-controller="ViolationsController" style="display:none">
+                <select ng-model="selected" ng-change="setViolation()" ng-options="id as violation.short_name for (id, violation) in violations">
+                    <option value="">-- Выберите нарушение из списка --</option>
+                </select><a href="#" class="removeViolation">X</a>
+                <div ng-include src="violation_html" onload="renderHtml()"></div>
+            </li>
+            <li ng-controller="ViolationsController" style="display:none">
+                <select ng-model="selected" ng-change="setViolation()" ng-options="id as violation.short_name for (id, violation) in violations">
+                    <option value="">-- Выберите нарушение из списка --</option>
+                </select><a href="#" class="removeViolation">X</a>
+                <div ng-include src="violation_html" onload="renderHtml()"></div>
+            </li>
+            <li ng-controller="ViolationsController" style="display:none">
+                <select ng-model="selected" ng-change="setViolation()" ng-options="id as violation.short_name for (id, violation) in violations">
+                    <option value="">-- Выберите нарушение из списка --</option>
+                </select><a href="#" class="removeViolation">X</a>
+                <div ng-include src="violation_html" onload="renderHtml()"></div>
+            </li>
+            <li ng-controller="ViolationsController" style="display:none">
+                <select ng-model="selected" ng-change="setViolation()" ng-options="id as violation.short_name for (id, violation) in violations">
+                    <option value="">-- Выберите нарушение из списка --</option>
+                </select><a href="#" class="removeViolation">X</a>
+                <div ng-include src="violation_html" onload="renderHtml()"></div>
+            </li>
+            <li ng-controller="ViolationsController" style="display:none">
+                <select ng-model="selected" ng-change="setViolation()" ng-options="id as violation.short_name for (id, violation) in violations">
+                    <option value="">-- Выберите нарушение из списка --</option>
+                </select><a href="#" class="removeViolation">X</a>
+                <div ng-include src="violation_html" onload="renderHtml()"></div>
+            </li>
 		</ol>
 		<a href="#" class="addViolation">Добавить пункт</a>
 		</p>
