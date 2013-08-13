@@ -148,7 +148,6 @@ body {
 p {text-align:justify;}
 .alignRight {padding-top: 15px;}
 .otst {padding-top: 15px;}
-.inputText {padding-top: 15px;}
 #zakaz-type{padding-top: 15px;}
 .alignCenter{padding-top: 40px;}
 .removeViolation {padding-left: 15px;}
@@ -186,4 +185,12 @@ address {
 }
 #violations > li {
     margin: 10px 0;
+}
+#violations textarea {
+    display: block;
+    width: 100%;
+    height: 300px;
+}
+.add-violation-form > select {
+    width: 50%;
 }
